@@ -3,8 +3,8 @@
 # You probably want to change the [user] section here since you are not me.
 
 [user]
-        name = Bo Lopker
-        email = blopker@23andme.com
+        name = Jonathan Hall
+        email = jlhall@23andme.com
 [alias]
         count   = !git shortlog -sn
 [color]

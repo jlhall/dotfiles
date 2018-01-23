@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 set -ex
 
-HTTP_GIT="https://github.com/blopker/dotfiles.git"
-SSH_GIT="git@github.com:blopker/dotfiles.git"
+HTTP_GIT="https://github.com/jlhall/dotfiles.git"
+SSH_GIT="git@github.com:jlhall/dotfiles.git"
 
 set_git_urls () {
 	# Change dotfiles remote so I can push

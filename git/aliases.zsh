@@ -11,7 +11,7 @@ alias gg="git grep -I --ignore-case --line-number --full-name --color --break --
 alias gglog='git log --patch -G '
 alias gl='git pull'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias gme="glog --author=\"Bo Lopker\""
+alias gme="glog --author=\"Jonathan Hall\""
 alias gp='git push origin HEAD --tags'
 alias greset="git reset --hard"
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"

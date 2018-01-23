@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ~/.trcli looks like "name:pass"
 
-CMD="http://h.blopker.com:8080/transmission/rpc --auth `cat ~/.trcli`"
+CMD="http://h.downahallway.com:8080/transmission/rpc --auth `cat ~/.trcli`"
 if [ $# -eq 1 ]; then
 	transmission-remote $CMD --add "$1"
 else
