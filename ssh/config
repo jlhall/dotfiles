@@ -2,5 +2,5 @@ Host *
   ServerAliveInterval 60
   UseKeychain yes
   AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_rsa
-  IdentityFile ~/.ssh/ttam-shared
+  IdentityFile ~/.ssh/id_rsa_gh
+  IdentityFile ~/.ssh/id_rsa_bb

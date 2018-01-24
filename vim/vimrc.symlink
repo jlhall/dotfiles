@@ -1,5 +1,39 @@
 set noswapfile
 
+call plug#begin('~/.vim/plugged')
+" list plugins for vim-plug
+Plug 'morhetz/gruvbox' " pretty retro theme (it's so hot right now)
+Plug 'neomake/neomake' " syntax linting
+Plug 'scrooloose/nerdtree' " directory tree view (see mappings below)
+Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
+Plug 'tpope/vim-unimpaired' " handy mappings
+Plug 'tpope/vim-commentary' " comment mappings (gcc comments a line, gc for motion..gcap for paragraph, gc visual mode)
+Plug 'srstevenson/vim-picker' " fuzzy file finder (leader p to fuzzy file find)
+Plug 'editorconfig/editorconfig-vim' " editorconfig.org (consistent style and plugin definitions)
+Plug 'jszakmeister/vim-togglecursor' " support for cursor shape changing (based on vim mode)
+Plug 'sheerun/vim-polyglot' " syntax highlighting, indenting
+Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
+Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
+" ADD NEW PLUGINS HERE
+" end of plugin list
+call plug#end()            " required
+
+" Gruvbox config
+colorscheme gruvbox " Setting colorscheme to gruvbox
+set background=dark " Setting dark mode for gruvbox
+let g:gruvbox_contrast_dark='hard' "Setting dark mode contrast level for gruvbox
+
+" Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
+if system('pmset -g ps | head -1') ==? 'AC Power'
+  call neomake#configure#automake('nw', 1000)
+else
+  call neomake#configure#automake('w')
+endif
+
+" Nerdtree config
+let NERDTreeIgnore = ['\.pyc$']
+
+
 " ----------------------------------------------------------------------------
 "  Text Formatting
 " ----------------------------------------------------------------------------
@@ -44,6 +78,79 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
+
+" GENERIC MAPPINGS
+
+" Map space to leader
+let mapleader = " "
+
+" Should be default
+nnoremap Y y$
+
+" Various mappings
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>g :vertical resize 101<CR>
+nnoremap <Leader>G :vertical resize 105<CR>
+nnoremap <Leader>rd :redraw!<CR>
+nnoremap <Leader>rc :source ~/.vimrc<CR>
+nnoremap <Leader>tt :tabedit<CR>
+nnoremap <Leader>tb :TagbarToggle<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>ge :Gdiff<CR>
+nnoremap <Leader>dg :diffget<CR>
+nnoremap <Leader>dp :diffput<CR>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" File finding
+nnoremap <Leader>p :PickerEdit<CR>
+nnoremap <Leader>j :PickerBuffer<CR>
+map <C-n> :NERDTreeToggle<CR>
+map <Leader>nf :NERDTreeFind<CR>
+
+" Ensure fugitive works, avoid loading EditorConfig for any remote files over
+" ssh.
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+if executable("rg")
+  " rg uses multiple threads to search. This has two notable consequences
+  "   1. The search is fast.
+  "   2. The result order is nondeterministic.
+  "
+  " rg has the option to return sorted results, but that runs the search in a
+  " single thread and is too slow.
+  "
+  " This is a dirty hack that lets me search in parallel and then sort the
+  " output. The hacky part is figuring out how to use a pipe when setting the
+  " grep program.  The pipe is escaped as `\\\|` an escaped backslash and an
+  " escaped pipe produce `\|`, which undergoes one more round of processing to
+  " end up with `|`.
+  "
+  " Since the sort is O(nlog(n)) on the number of results, the
+  " added time is negligible on specific search and is not that bad on general
+  " ones.
+
+  set grepprg=rg\ --vimgrep\ $*\\\|sort
+  set grepformat^=%f:%l:%c:%m
+
+  " Nicer than built-in :grep.
+  command! -nargs=+ Gr execute "silent grep <args>" | copen
+
+  " Smart-case and literal string.
+  command! -nargs=+ Ga execute "Gr -SF <args>"
+
+  " Only look in tests.
+  command! -nargs=+ Gt execute "Ga -g '*tests*' <args>"
+
+  " Don't look in tests.
+  command! -nargs=+ G execute "Ga -g '!*tests*' <args>"
+endif
 
 " ----------------------------------------------------------------------------
 "  UI
