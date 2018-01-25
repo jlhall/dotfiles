@@ -3,8 +3,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-export PROJECTS=~/code
-export ZSH=$HOME/.dotfiles
+export ZSH=$HOME/dotfiles
 export PATH="$HOME/bin:$ZSH/bin:$PATH"
 
 # OSX switch
