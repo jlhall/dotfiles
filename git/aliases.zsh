@@ -1,8 +1,8 @@
-alias ga="git add --all :/"
+alias ga="git add"
 alias gam="git commit --amend -C HEAD"
 alias gb='git branch'
 alias gbrm=git-delete-local-merged
-alias gc='git commit -am'
+alias gc='git commit -m'
 alias gco='git checkout'
 alias gd='git diff'
 alias gf='git fetch --all --prune'
@@ -15,9 +15,10 @@ alias gme="glog --author=\"Jonathan Hall\""
 alias greset="git reset --hard"
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gs='git status -sb'
+alias gpo='git push origin'
 
 # Create new feature branch.
-gfb() { git checkout -b feature/$1; }
+gcob() { git checkout -b feature/$1; }
 
 # Generate a gitignore to stdout
 # gi linux,osx,python

@@ -2,7 +2,7 @@ set noswapfile
 
 call plug#begin('~/.vim/plugged')
 " list plugins for vim-plug
-Plug 'morhetz/gruvbox' " pretty retro theme (it's so hot right now)
+Plug 'joshdick/onedark.vim' " pretty retro theme (it's so hot right now)
 Plug 'neomake/neomake' " syntax linting
 Plug 'scrooloose/nerdtree' " directory tree view (see mappings below)
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
@@ -18,10 +18,7 @@ Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hel
 " end of plugin list
 call plug#end()            " required
 
-" Gruvbox config
-colorscheme gruvbox " Setting colorscheme to gruvbox
-set background=dark " Setting dark mode for gruvbox
-let g:gruvbox_contrast_dark='hard' "Setting dark mode contrast level for gruvbox
+colorscheme onedark " setting colorscheme to onedark
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'
