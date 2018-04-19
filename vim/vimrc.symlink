@@ -14,7 +14,7 @@ Plug 'jszakmeister/vim-togglecursor' " support for cursor shape changing (based 
 Plug 'sheerun/vim-polyglot' " syntax highlighting, indenting
 Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
 Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
-Plug 'jremmen/vim-ripgrep' " don't leave vim to pattern search, huzzah
+Plug 'jremmen/vim-ripgrep' " standard rg use is below, but a more ~vim-picker style is reflected by this plugin
 
 " ADD NEW PLUGINS HERE
 " end of plugin list
@@ -110,15 +110,41 @@ nnoremap <C-l> <C-w>l
 " File and pattern finding
 nnoremap <Leader>p :PickerEdit<CR>
 nnoremap <Leader>j :PickerBuffer<CR>
-nnoremap <Leader>rg :Rg<CR>
+function! RgArg(n)
+  exe "Rg ".a:n
+endfunction
+nnoremap <leader>rg :call RgArg(input('Search Pattern: '))<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
-
+function! SwitchToNextBuffer(incr)
+  let help_buffer = (&filetype == 'help')
+  let current = bufnr("%")
+  let last = bufnr("$")
+  let new = current + a:incr
+  while 1
+    if new != 0 && bufexists(new) && ((getbufvar(new, "&filetype") == 'help') == help_buffer)
+      execute ":buffer ".new
+      break
+    else
+      let new = new + a:incr
+      if new < 1
+        let new = last
+      elseif new > last
+        let new = 1
+      endif
+      if new == current
+        break
+      endif
+    endif
+  endwhile
+endfunction
+nnoremap <Leader>nb :call SwitchToNextBuffer(1)<CR>
+nnoremap <Leader>vb :call SwitchToNextBuffer(-1)<CR>
 " Ensure fugitive works, avoid loading EditorConfig for any remote files over
 " ssh.
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-if executable("rg")
+" if executable("rg")
   " rg uses multiple threads to search. This has two notable consequences
   "   1. The search is fast.
   "   2. The result order is nondeterministic.
@@ -136,21 +162,21 @@ if executable("rg")
   " added time is negligible on specific search and is not that bad on general
   " ones.
 
-  set grepprg=rg\ --vimgrep\ $*\\\|sort
-  set grepformat^=%f:%l:%c:%m
+  " set grepprg=rg\ --vimgrep\ $*\\\|sort
+  " set grepformat^=%f,%l:%c:%m
 
   " Nicer than built-in :grep.
-  command! -nargs=+ Gr execute "silent grep <args>" | copen
+  " command! -nargs=+ Gr execute "silent grep <args>" | copen
 
   " Smart-case and literal string.
-  command! -nargs=+ Ga execute "Gr -SF <args>"
+  " command! -nargs=+ Ga execute "Gr -SF <args>"
 
   " Only look in tests.
-  command! -nargs=+ Gt execute "Ga -g '*tests*' <args>"
+  " command! -nargs=+ Gt execute "Ga -g '*tests*' <args>"
 
   " Don't look in tests.
-  command! -nargs=+ G execute "Ga -g '!*tests*' <args>"
-endif
+  " command! -nargs=+ G execute "Ga -g '!*tests*' <args>"
+" endif
 
 " ----------------------------------------------------------------------------
 "  UI
