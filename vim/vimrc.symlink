@@ -14,6 +14,8 @@ Plug 'jszakmeister/vim-togglecursor' " support for cursor shape changing (based 
 Plug 'sheerun/vim-polyglot' " syntax highlighting, indenting
 Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
 Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
+Plug 'jremmen/vim-ripgrep' " don't leave vim to pattern search, huzzah
+
 " ADD NEW PLUGINS HERE
 " end of plugin list
 call plug#end()            " required
@@ -105,9 +107,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" File finding
+" File and pattern finding
 nnoremap <Leader>p :PickerEdit<CR>
 nnoremap <Leader>j :PickerBuffer<CR>
+nnoremap <Leader>rg :Rg<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
 

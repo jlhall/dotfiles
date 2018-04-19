@@ -25,6 +25,11 @@ function prune {
   done
 }
 
+# check given port for processes (to likely murder with sudo kill)
+function wtf {
+  sudo lsof -i :$1
+}
+
 # bye bye .DS_Store
 alias no_ds_store='find . -name ".DS_Store" -print0 | xargs -0 rm -rf'
 

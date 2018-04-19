@@ -20,6 +20,15 @@ alias gpo='git push origin'
 # Create new feature branch.
 gcob() { git checkout -b feature/$1; }
 
+# RIP some unfortunate branch... buh bye
+rip() {
+  delete=${2-d}
+  gb | grep $1 | while read -r line ; do
+    echo "Processing $line"
+    gb -$delete $line
+  done
+}
+
 # Generate a gitignore to stdout
 # gi linux,osx,python
 gi() { curl -s https://www.gitignore.io/api/$@ ;}
