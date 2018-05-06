@@ -11,6 +11,7 @@ alias notes="e ~/Dropbox/notes"
 # toggle seeing dotfiles or not
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias vssh='vagrant ssh'
 
 # see the last few commits
 alias showCommits='git log -n 5 --date=rfc-local'
@@ -23,6 +24,10 @@ function prune {
       git branch -$delete $k
     fi
   done
+}
+
+function vdo {
+  vagrant ssh -c $1
 }
 
 # check given port for processes (to likely murder with sudo kill)
