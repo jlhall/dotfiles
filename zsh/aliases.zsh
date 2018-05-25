@@ -27,7 +27,11 @@ function prune {
 }
 
 function vdo {
-  vagrant ssh -c $1
+  vagrant ssh -c "$*"
+}
+
+function lsdir {
+  find $1 -type d -name "*$2*"
 }
 
 # check given port for processes (to likely murder with sudo kill)
