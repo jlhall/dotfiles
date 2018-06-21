@@ -196,6 +196,8 @@ set nostartofline          " don't jump to the start of line when scrolling
 syntax on                  " Syntax highlighting
 set mouse=a                " enable mouse scroll
 
+set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc
+
 " ----------------------------------------------------------------------------
 " visual Cues
 " ----------------------------------------------------------------------------
