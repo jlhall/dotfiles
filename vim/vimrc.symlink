@@ -88,8 +88,10 @@ nnoremap Y y$
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>g :vertical resize 101<CR>
-nnoremap <Leader>G :vertical resize 105<CR>
+nnoremap <Leader>4 :vertical resize 300<CR>
+nnoremap <Leader>3 :vertical resize 250<CR>
+nnoremap <Leader>2 :vertical resize 200<CR>
+nnoremap <Leader>1 :vertical resize 100<CR>
 nnoremap <Leader>rd :redraw!<CR>
 nnoremap <Leader>rc :source ~/.vimrc<CR>
 nnoremap <Leader>tt :tabedit<CR>
