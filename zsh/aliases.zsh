@@ -16,11 +16,11 @@ alias vssh='vagrant ssh'
 # see the last few commits
 alias showCommits='git log -n 5 --date=rfc-local'
 
-# cleans up local branches that haven't seen a commit in a week
+# cleans up local branches that haven't seen a commit in 2 weeks
 function prune {
   delete=${1-d}
   for k in $(git branch | sed /\*/d); do
-    if [ -z "$(git log -1 --since='1 week ago' -s $k)" ]; then
+    if [ -z "$(git log -1 --since='2 weeks ago' -s $k)" ]; then
       git branch -$delete $k
     fi
   done
