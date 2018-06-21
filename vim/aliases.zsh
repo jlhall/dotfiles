@@ -1,2 +1,3 @@
-# always use vim!
-alias vi="vim"
+# always use nvim!
+alias vi="nvim"
+alias vim="nvim"

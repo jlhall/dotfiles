@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 " list plugins for vim-plug
 Plug 'joshdick/onedark.vim' " pretty retro theme (it's so hot right now)
 Plug 'neomake/neomake' " syntax linting
-Plug 'scrooloose/nerdtree' " directory tree view (see mappings below)
+Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
 Plug 'tpope/vim-unimpaired' " handy mappings
 Plug 'tpope/vim-commentary' " comment mappings (gcc comments a line, gc for motion..gcap for paragraph, gc visual mode)
@@ -29,9 +29,6 @@ if system('pmset -g ps | head -1') ==? 'AC Power'
 else
   call neomake#configure#automake('w')
 endif
-
-" Nerdtree config
-let NERDTreeIgnore = ['\.pyc$']
 
 
 " ----------------------------------------------------------------------------
@@ -118,8 +115,6 @@ function! RgArg(n)
   exe "Rg ".a:n
 endfunction
 nnoremap <leader>rg :call RgArg(input('Search Pattern: '))<CR>
-map <C-n> :NERDTreeToggle<CR>
-map <Leader>nf :NERDTreeFind<CR>
 function! SwitchToNextBuffer(incr)
   let help_buffer = (&filetype == 'help')
   let current = bufnr("%")

@@ -13,6 +13,6 @@ then
 fi
 
 # Install homebrew packages
-brew install git vim zsh wget node pyenv
+brew install git vim zsh wget node pyenv neovim
 
 exit 0
