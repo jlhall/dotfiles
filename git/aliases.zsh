@@ -4,6 +4,7 @@ alias gb='git branch'
 alias gbrm=git-delete-local-merged
 alias gc='git commit -m'
 alias gco='git checkout'
+alias gcom='git checkout master'
 alias gd='git diff'
 alias gf='git fetch --all --prune'
 alias ggf='git ls-files | grep'
@@ -19,6 +20,14 @@ alias gpo='git push origin'
 
 # Create new feature branch.
 gcob() { git checkout -b feature/$1; }
+
+# pass ttam project and ticket to checkout the associated branch
+# will break for multi-branch situations
+ttam() {
+  project=$1
+  ticket=$2
+  git branch -a | grep -v remotes | grep -i $project"-"$ticket | xargs git checkout;
+}
 
 # RIP some unfortunate branch... buh bye
 rip() {

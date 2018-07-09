@@ -59,6 +59,8 @@ let mapleader = ","
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
+" search visual block text with '//'
+vnoremap // y/<C-R>"<CR>
 
 " reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
@@ -199,6 +201,9 @@ syntax on                  " Syntax highlighting
 set mouse=a                " enable mouse scroll
 
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc
+
+set guicursor+=n-v-c-i:blinkwait5-blinkon4-blinkoff1
+hi StatusLine ctermbg=78 ctermfg=16
 
 " ----------------------------------------------------------------------------
 " visual Cues
