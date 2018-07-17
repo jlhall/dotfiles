@@ -2,7 +2,7 @@ set noswapfile
 
 call plug#begin('~/.vim/plugged')
 " list plugins for vim-plug
-Plug 'KKPMW/sacredforest-vim' " yep
+Plug 'neutaaaaan/iosvkem' " theme
 Plug 'neomake/neomake' " syntax linting
 Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
@@ -21,8 +21,7 @@ Plug 'ajh17/VimCompletesMe' " autocomplete
 " end of plugin list
 call plug#end()            " required
 
-colorscheme sacredforest " setting colorscheme to sacredforest
-set termguicolors
+colorscheme iosvkem " setting colorscheme to sacredforest
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'
