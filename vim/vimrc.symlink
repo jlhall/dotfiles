@@ -22,6 +22,7 @@ Plug 'ajh17/VimCompletesMe' " autocomplete
 call plug#end()            " required
 
 colorscheme sacredforest " setting colorscheme to sacredforest
+set termguicolors
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'
