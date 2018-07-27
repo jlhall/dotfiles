@@ -21,7 +21,17 @@ Plug 'ajh17/VimCompletesMe' " autocomplete
 " end of plugin list
 call plug#end()            " required
 
-colorscheme iosvkem " setting colorscheme to sacredforest
+" ----------------------------------------------------------------------------
+" Theme
+" ----------------------------------------------------------------------------
+
+colorscheme iosvkem
+
+
+
+" ----------------------------------------------------------------------------
+" Tweaks
+" ----------------------------------------------------------------------------
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'
@@ -202,9 +212,12 @@ set mouse=a                " enable mouse scroll
 
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc
 
-set guicursor+=n-v-c-i:blinkwait5-blinkon4-blinkoff1
+
 hi StatusLine ctermbg=78 ctermfg=16
 hi StatusLineNC ctermbg=240 ctermfg=16
+
+set guicursor+=n-v-c-i:blinkwait5-blinkon4-blinkoff1
+
 " ----------------------------------------------------------------------------
 " visual Cues
 " ----------------------------------------------------------------------------
