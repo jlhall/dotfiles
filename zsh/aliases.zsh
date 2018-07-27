@@ -27,6 +27,21 @@ function prune {
   done
 }
 
+function int-get {
+  job=${1}
+  url="https://JENKINS_URL/${job}/config.xml"
+  curl -X GET "${url}" -u "USERNAME:TOKEN" --create-dirs -o "./configs/${1}/config.xml"
+}
+
+function int-post {
+  url="https://USER:TOKEN@JENKINS_HOST_NAME/createItem?name=${1}"
+  curl -X POST "${url}" --data-binary "@./configs/${1}/config.xml" -H "Jenkins-Crumb:JENKINS_CRUMB" -H "Content-Type:text/xml"
+}
+
+function fuck-jenkins {
+ int-get "${1}" && int-post "${1}"
+}
+
 function vdo {
   vagrant ssh -c "$*"
 }
