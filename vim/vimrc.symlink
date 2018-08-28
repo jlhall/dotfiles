@@ -66,9 +66,6 @@ set autoread               " Set to auto read when a file is changed from the ou
 "  Remapping
 " ----------------------------------------------------------------------------
 
-" lead with ,
-let mapleader = ","
-
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
@@ -120,6 +117,7 @@ nnoremap <Leader>dp :diffput<CR>
 nnoremap <Leader>vs :vsplit<CR>
 nnoremap <Leader>hs :split<CR>
 nnoremap <Leader>bq :bd<CR>
+nnoremap <Leader>no :noh<CR>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
