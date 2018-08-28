@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<workflow>
+  <name>Spotify Mini Player</name>
+  <version>7.14</version>
+  <bundle>com.vdesabou.spotify.mini.player</bundle>
+  <updated>1531925537</updated>
+  <file>spotifyminiplayer.alfredworkflow</file>
+</workflow>

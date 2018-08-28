@@ -4,7 +4,7 @@
 
 [user]
         name = Jonathan Hall
-        email = jlhall@23andme.com
+	email = jhall@23andme.com
 [alias]
         count   = !git shortlog -sn
 [color]

@@ -16,6 +16,7 @@ Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline 
 Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
 Plug 'jremmen/vim-ripgrep' " standard rg use is below, but a more ~vim-picker style is reflected by this plugin
 Plug 'ajh17/VimCompletesMe' " autocomplete
+Plug 'nathanaelkane/vim-indent-guides' " see indent
 
 " ADD NEW PLUGINS HERE
 " end of plugin list
@@ -26,7 +27,9 @@ call plug#end()            " required
 " ----------------------------------------------------------------------------
 
 colorscheme iosvkem
-
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 
 " ----------------------------------------------------------------------------
