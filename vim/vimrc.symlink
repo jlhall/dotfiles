@@ -43,6 +43,7 @@ else
   call neomake#configure#automake('w')
 endif
 
+set clipboard^=unnamed
 
 " ----------------------------------------------------------------------------
 "  Text Formatting
@@ -118,6 +119,8 @@ nnoremap <Leader>vs :vsplit<CR>
 nnoremap <Leader>hs :split<CR>
 nnoremap <Leader>bq :bd<CR>
 nnoremap <Leader>no :noh<CR>
+" Resizes all splits based on the overall split 'situation'
+nnoremap <Leader>z <C-w>=<CR>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
