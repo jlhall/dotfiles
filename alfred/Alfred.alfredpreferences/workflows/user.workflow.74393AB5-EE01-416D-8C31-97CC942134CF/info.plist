@@ -38,11 +38,11 @@
 	<key>createdby</key>
 	<string></string>
 	<key>description</key>
-	<string>Quickly open bitbucket prs by specifying project, author, and query after the "pr" keyword</string>
+	<string>Quickly open jira issues by specifying project string and ticket number after the "j" keyword</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Bitbucket Quick Open</string>
+	<string>JIRA Quick Open - COPY</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -62,10 +62,8 @@ echo '{
     "config" : {
     },
     "variables" : {
-      "proj": "'.$vars[0].'",
-	  "state": "'.strtoupper($vars[1]).'",
-      "author": "'.$vars[2].'",
-      "query": "'.$vars[3].'",
+      "proj": "'.strtoupper($vars[0]).'",
+      "num": "'.$vars[1].'"
     }
   }
 }'
@@ -90,11 +88,11 @@ echo '{
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>pr</string>
+				<string>j</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Bitbucket</string>
+				<string>JIRA</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -113,7 +111,7 @@ echo '{
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://bitbucket.org/23andme/{var:proj}/pull-requests/?state={var:state}&amp;author={var:author}&amp;query={var:query}</string>
+				<string>https://23andme.atlassian.net/browse/{var:proj}-{var:num}</string>
 				<key>utf8</key>
 				<true/>
 			</dict>

@@ -3,6 +3,8 @@ unset DISPLAY
 # vi please, and quickly
 export KEYTIMEOUT=1
 
+echo "Take your vitamins. Have a stretch. Do good work. Cothromaíocht agus chéile."
+
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"

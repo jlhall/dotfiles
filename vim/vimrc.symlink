@@ -2,7 +2,7 @@ set noswapfile
 
 call plug#begin('~/.vim/plugged')
 " list plugins for vim-plug
-Plug 'neutaaaaan/iosvkem' " theme
+Plug 'neutaaaaan/iosvkem' " dark theme
 Plug 'neomake/neomake' " syntax linting
 Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
@@ -15,8 +15,23 @@ Plug 'sheerun/vim-polyglot' " syntax highlighting, indenting
 Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
 Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
 Plug 'jremmen/vim-ripgrep' " standard rg use is below, but a more ~vim-picker style is reflected by this plugin
-Plug 'ajh17/VimCompletesMe' " autocomplete
 Plug 'nathanaelkane/vim-indent-guides' " see indent
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'Shougo/neosnippet' " For func argument completion
+  Plug 'Shougo/neosnippet-snippets' " For func argument completion
+endif
+
+" sources for deoplete
+Plug 'zchee/deoplete-jedi' " python
+Plug 'wokalski/autocomplete-flow' " js
+Plug 'pbogut/deoplete-elm' " need elm-oracle for it to work
+Plug 'zchee/deoplete-go', { 'do': 'make'} " golang
+Plug 'slashmili/alchemist.vim' " elixir
 
 " ADD NEW PLUGINS HERE
 " end of plugin list
@@ -31,10 +46,46 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" With neosnippets
+let g:neosnippet#enable_completed_snippet = 1
+
+" Use TAB to complete when typing words, else inserts TABs as usual.  Uses
+" dictionary, source files, and completor to find matching words to complete.
+
+" Note: usual completion is on <C-n> but more trouble to press all the time.
+" Never type the same word twice and maybe learn a new spellings!
+" Use the Linux dictionary when spelling is in doubt.
+function! Tab_Or_Complete() abort
+  " If completor is already open the `tab` cycles through suggested completions.
+  if pumvisible()
+    return "\<C-N>"
+  " If completor is not open and we are in the middle of typing a word then
+  " `tab` opens completor menu.
+  elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-R>=completor#do('complete')\<CR>"
+  else
+    " If we aren't typing a word and we press `tab` simply do the normal `tab`
+    " action.
+    return "\<Tab>"
+  endif
+endfunction
+
+" Use `tab` key to select completions.  Default is arrow keys.
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use tab to trigger auto completion.  Default suggests completions as you type.
+let g:completor_auto_trigger = 0
+inoremap <expr> <Tab> Tab_Or_Complete()
 
 " ----------------------------------------------------------------------------
 " Tweaks
 " ----------------------------------------------------------------------------
+
+" leaving pylint on was an exercise in yak shaving
+let g:neomake_python_enabled_makers = ['pep8', 'flake8']
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'
@@ -133,6 +184,7 @@ function! RgArg(n)
   exe "Rg ".a:n
 endfunction
 nnoremap <leader>rg :call RgArg(input('Search Pattern: '))<CR>
+
 function! SwitchToNextBuffer(incr)
   let help_buffer = (&filetype == 'help')
   let current = bufnr("%")
@@ -157,6 +209,27 @@ function! SwitchToNextBuffer(incr)
 endfunction
 nnoremap <Leader>nb :call SwitchToNextBuffer(1)<CR>
 nnoremap <Leader>vb :call SwitchToNextBuffer(-1)<CR>
+
+function! MarkWindowSwap()
+    let g:markedWinNum = winnr()
+endfunction
+function! DoWindowSwap()
+    "Mark destination
+    let curNum = winnr()
+    let curBuf = bufnr("%")
+    exe g:markedWinNum . "wincmd w"
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr("%")
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf
+endfunction
+nnoremap <Leader>mw :call MarkWindowSwap()<CR>
+nnoremap <Leader>sw :call DoWindowSwap()<CR>
+
 " Ensure fugitive works, avoid loading EditorConfig for any remote files over
 " ssh.
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
