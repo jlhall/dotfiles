@@ -12,8 +12,9 @@ alias notes="e ~/Dropbox/notes"
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias vssh='vagrant ssh'
-alias ferr='pbpaste | jsonpp'
+alias ferr='pbpaste | jsonpp | grep exc_info'
 alias grod='git rebase -i origin/develop'
+alias create_tags="ctags -R --exclude=.git --exclude=node_modules --exclude=venv"
 
 # see the last few commits
 alias showCommits='git log -n 5 --date=rfc-local'

@@ -14,8 +14,9 @@ Plug 'jszakmeister/vim-togglecursor' " support for cursor shape changing (based 
 Plug 'sheerun/vim-polyglot' " syntax highlighting, indenting
 Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
 Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
-Plug 'jremmen/vim-ripgrep' " standard rg use is below, but a more ~vim-picker style is reflected by this plugin
-Plug 'nathanaelkane/vim-indent-guides' " see indent
+Plug 'chrisjohnson/vim-grep' " no thought grepping from within vim (key 'gr')
+Plug 'thaerkh/vim-indentguides' " indent guides ffs | = tab, choppy pipe = space
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -42,9 +43,6 @@ call plug#end()            " required
 " ----------------------------------------------------------------------------
 
 colorscheme iosvkem
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -84,12 +82,11 @@ inoremap <expr> <Tab> Tab_Or_Complete()
 " Tweaks
 " ----------------------------------------------------------------------------
 
-" leaving pylint on was an exercise in yak shaving
-let g:neomake_python_enabled_makers = ['pep8', 'flake8']
+let g:neomake_python_enabled_makers = ["flake8", "pyflakes", "pylint"]
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'
-  call neomake#configure#automake('nw', 1000)
+  call neomake#configure#automake('nwri', 500)
 else
   call neomake#configure#automake('w')
 endif
@@ -180,10 +177,6 @@ nnoremap <C-l> <C-w>l
 " File and pattern finding
 nnoremap <Leader>p :PickerEdit<CR>
 nnoremap <Leader>j :PickerBuffer<CR>
-function! RgArg(n)
-  exe "Rg ".a:n
-endfunction
-nnoremap <leader>rg :call RgArg(input('Search Pattern: '))<CR>
 
 function! SwitchToNextBuffer(incr)
   let help_buffer = (&filetype == 'help')
