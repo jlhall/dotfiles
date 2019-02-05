@@ -2,7 +2,9 @@ set noswapfile
 
 call plug#begin('~/.vim/plugged')
 " list plugins for vim-plug
-Plug 'neutaaaaan/iosvkem' " dark theme
+Plug 'neutaaaaan/iosvkem' " dark theme, soft blues, etc.
+Plug 'wesgibbs/vim-irblack' " alternate dark theme, like a green/orange
+Plug 'kirecek/vim-kxxe256' " another alternate dark theme, like a green/purple
 Plug 'neomake/neomake' " syntax linting
 Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
@@ -42,7 +44,9 @@ call plug#end()            " required
 " Theme
 " ----------------------------------------------------------------------------
 
-colorscheme iosvkem
+" colorscheme iosvkem
+colorscheme ir_black
+" colorscheme kxxe
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1

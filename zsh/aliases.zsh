@@ -15,6 +15,7 @@ alias vssh='vagrant ssh'
 alias ferr='pbpaste | jsonpp | grep exc_info'
 alias grod='git rebase -i origin/develop'
 alias create_tags="ctags -R --exclude=.git --exclude=node_modules --exclude=venv"
+alias cpu="top -ocpu -s10"
 
 # see the last few commits
 alias showCommits='git log -n 5 --date=rfc-local'

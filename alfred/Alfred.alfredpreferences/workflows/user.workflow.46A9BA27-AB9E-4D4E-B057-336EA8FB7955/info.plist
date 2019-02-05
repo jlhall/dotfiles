@@ -12,7 +12,20 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FC6F0E9D-6A00-4D4C-881D-27E53EA501D2</string>
+				<string>F23F7CAE-FD9E-43E9-8D2D-10251FA28FC3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F23F7CAE-FD9E-43E9-8D2D-10251FA28FC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D0A1A046-80AB-4689-A0A1-F8C0E665F3FC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -22,18 +35,7 @@
 			</dict>
 		</array>
 		<key>FC6F0E9D-6A00-4D4C-881D-27E53EA501D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7D526A39-84D9-46E1-9288-0C062BC95C39</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 	</dict>
 	<key>createdby</key>
 	<string></string>
@@ -87,6 +89,25 @@ echo '{
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://bitbucket.org/23andme/{var:proj}/pull-requests/?state={var:state}&amp;author={var:author}&amp;query={var:query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7D526A39-84D9-46E1-9288-0C062BC95C39</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -113,16 +134,67 @@ echo '{
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://bitbucket.org/23andme/{var:proj}/pull-requests/?state={var:state}&amp;author={var:author}&amp;query={var:query}</string>
+				<string>{query}</string>
 				<key>utf8</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>7D526A39-84D9-46E1-9288-0C062BC95C39</string>
+			<string>D0A1A046-80AB-4689-A0A1-F8C0E665F3FC</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>""" Make a nice url for bitbucket JIRA """
+import sys
+QUERY = sys.argv[1:]
+
+
+def assign_args(idx):
+    """ return a list item if the index exists """
+    if len(QUERY) &gt;= idx + 1:
+        return QUERY[idx]
+    return ""
+
+
+PROJ = assign_args(0)
+STATE = assign_args(1)
+USERNAME = assign_args(2)
+BB_QUERY = assign_args(3)
+
+base_url = "https://bitbucket.org/23andme/"
+if PROJ != "":
+    base_url += "%s/pull-requests/" % (PROJ)
+if STATE != "":
+    STATE = STATE.upper()
+    base_url += "?state=%s" % STATE
+if USERNAME != "":
+    base_url += "&amp;username=%s" % USERNAME
+if BB_QUERY != "":
+    base_url += "&amp;query=%s" % BB_QUERY
+
+sys.stdout.write(base_url)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F23F7CAE-FD9E-43E9-8D2D-10251FA28FC3</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -132,16 +204,30 @@ echo '{
 		<key>6E4EEBD5-0AB8-4986-8EC0-1CD707F41689</key>
 		<dict>
 			<key>xpos</key>
-			<integer>210</integer>
+			<integer>90</integer>
 			<key>ypos</key>
 			<integer>230</integer>
 		</dict>
 		<key>7D526A39-84D9-46E1-9288-0C062BC95C39</key>
 		<dict>
 			<key>xpos</key>
-			<integer>470</integer>
+			<integer>550</integer>
 			<key>ypos</key>
-			<integer>240</integer>
+			<integer>90</integer>
+		</dict>
+		<key>D0A1A046-80AB-4689-A0A1-F8C0E665F3FC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>590</integer>
+			<key>ypos</key>
+			<integer>400</integer>
+		</dict>
+		<key>F23F7CAE-FD9E-43E9-8D2D-10251FA28FC3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>330</integer>
+			<key>ypos</key>
+			<integer>470</integer>
 		</dict>
 		<key>FC6F0E9D-6A00-4D4C-881D-27E53EA501D2</key>
 		<dict>
