@@ -155,13 +155,14 @@ echo '{
 				<key>script</key>
 				<string>""" Make a nice url for bitbucket JIRA """
 import sys
-QUERY = sys.argv[1:]
+QUERY = sys.argv[1]
+ARGS = QUERY.split()
 
 
 def assign_args(idx):
     """ return a list item if the index exists """
-    if len(QUERY) &gt;= idx + 1:
-        return QUERY[idx]
+    if len(ARGS) &gt;= idx + 1:
+        return ARGS[idx]
     return ""
 
 
@@ -180,7 +181,6 @@ if USERNAME != "":
     base_url += "&amp;username=%s" % USERNAME
 if BB_QUERY != "":
     base_url += "&amp;query=%s" % BB_QUERY
-
 sys.stdout.write(base_url)</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>

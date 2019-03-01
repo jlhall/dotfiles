@@ -14,11 +14,23 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 alias vssh='vagrant ssh'
 alias ferr='pbpaste | jsonpp | grep exc_info'
 alias grod='git rebase -i origin/develop'
+alias grom='git rebase -i origin/master'
 alias create_tags="ctags -R --exclude=.git --exclude=node_modules --exclude=venv"
 alias cpu="top -ocpu -s10"
 
 # see the last few commits
 alias showCommits='git log -n 5 --date=rfc-local'
+
+# interactive rebase against origin/$1
+function ir {
+  branch=${1-master}
+  if [ "$branch" =~ "master" ]
+  then
+    printf "You didn't pass a branch, presuming you want master\n"
+  fi
+  sleep 2
+  git rebase -i origin/$branch
+}
 
 # cleans up local branches that haven't seen a commit in 2 weeks
 function prune {
