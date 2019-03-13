@@ -65,6 +65,40 @@ function lsdir {
   find $1 -type d -name "*$2*"
 }
 
+# this doesn't tell the diff between repeated commands, but that shouldn't be an issue
+# this one is for make
+function mm {
+  for last; do true; done
+  final=""
+  for var in "$@"
+  do
+    if [ "$var" = "$last" ]
+    then
+      final+="make $var"
+    else
+      final+="make $var && "
+    fi
+  done
+  eval $final
+}
+
+# this doesn't tell the diff between repeated commands, but that shouldn't be an issue
+# this one is for generic chaining
+function chain {
+  for last; do true; done
+  final=""
+  for var in "$@"
+  do
+    if [ "$var" = "$last" ]
+    then
+      final+="$var"
+    else
+      final+="$var && "
+    fi
+  done
+  eval $final
+}
+
 # check given port for processes (to likely murder with sudo kill)
 function wtf {
   sudo lsof -i :$1

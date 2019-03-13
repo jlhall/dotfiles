@@ -5,6 +5,7 @@ alias gbrm=git-delete-local-merged
 alias gc='git commit -m'
 alias gco='git checkout'
 alias gcom='git checkout master'
+alias gcod='git checkout develop'
 alias gd='git diff'
 alias gf='git fetch --all --prune'
 alias ggf='git ls-files | grep'
