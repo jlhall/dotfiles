@@ -42,6 +42,15 @@ function prune {
   done
 }
 
+# full ir using function for common rebase workflow
+function gitsucks {
+  project=$1
+  ticket=$2
+  basebranch=${3-master}
+  chain "gco $basebranch" gp "ttam $project $ticket" "ir $basebranch"
+}
+
+
 function int-get {
   job=${1}
   url="https://JENKINS_URL/${job}/config.xml"
