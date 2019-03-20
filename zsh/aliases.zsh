@@ -50,6 +50,17 @@ function gitsucks {
   chain "gco $basebranch" gp "ttam $project $ticket" "ir $basebranch"
 }
 
+function pfxit {
+  project=$1
+  ticket=$2
+  gitsucks $project $ticket "develop"
+}
+
+function fxit {
+  project=$1
+  ticket=$2
+  gitsucks $project $ticket
+}
 
 function int-get {
   job=${1}
