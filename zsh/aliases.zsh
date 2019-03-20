@@ -53,7 +53,7 @@ function gitsucks {
 function pfxit {
   project=$1
   ticket=$2
-  gitsucks $project $ticket "develop"
+  gitsucks $project $ticket develop
 }
 
 function fxit {
