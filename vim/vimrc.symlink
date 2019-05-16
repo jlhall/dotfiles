@@ -1,10 +1,19 @@
 set noswapfile
 
 call plug#begin('~/.vim/plugged')
-" list plugins for vim-plug
-Plug 'neutaaaaan/iosvkem' " dark theme, soft blues, etc.
-Plug 'wesgibbs/vim-irblack' " alternate dark theme, like a green/orange
-Plug 'kirecek/vim-kxxe256' " another alternate dark theme, like a green/purple
+" list plugins for vim-plug below
+
+" themes
+Plug 'neutaaaaan/iosvkem' " dark theme, soft blues, etc. :: iosvkem
+Plug 'wesgibbs/vim-irblack' " dark theme, like a green/orange :: ir_black
+Plug 'kirecek/vim-kxxe256' " dark theme, like a green/purple :: kxxe
+Plug 'chase/focuspoint-vim' " dark theme, blue/red/gold/green, and paler versions :: focuspoint
+Plug 'ntk148v/vim-horizon' " dark theme, green, pink, pale gold, pale red :: horizon
+Plug 'treycucco/vim-monotonic' " dark theme, white/grey/blue :: monotonic
+Plug 'vim-scripts/bw.vim' " light theme, black/underline :: bw
+Plug 'logico-software/typewriter' " light theme, black/grey :: typewriter
+
+" everything else
 Plug 'neomake/neomake' " syntax linting
 Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
@@ -44,9 +53,19 @@ call plug#end()            " required
 " Theme
 " ----------------------------------------------------------------------------
 
-" colorscheme iosvkem
-colorscheme ir_black
-" colorscheme kxxe
+" DARK BACKGROUND PRESET ITERM
+
+" dark themes
+" colorscheme iosvkem " seems washed out
+" colorscheme ir_black " maybe too pale
+" colorscheme kxxe " purples and green strings really pop
+" colorscheme focuspoint " strings and builtins/control structures are nice
+" colorscheme horizon " think inverting your normal color prefs
+colorscheme monotonic " todo, strings really pop, everything else forces reading
+
+" light themes
+" colorscheme bw
+" colorscheme typewriter
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -73,6 +92,16 @@ function! Tab_Or_Complete() abort
     return "\<Tab>"
   endif
 endfunction
+
+" Like bufdo but restore the current buffer.
+function! BufDo(command)
+  let currBuff=bufnr("%")
+  execute 'bufdo ' . a:command
+  execute 'buffer ' . currBuff
+endfunction
+com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
+
+nnoremap <Leader>ee :call Bufdo("e")<CR>
 
 " Use `tab` key to select completions.  Default is arrow keys.
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
