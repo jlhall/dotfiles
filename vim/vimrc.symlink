@@ -61,7 +61,7 @@ call plug#end()            " required
 " colorscheme kxxe " purples and green strings really pop
 " colorscheme focuspoint " strings and builtins/control structures are nice
 " colorscheme horizon " think inverting your normal color prefs
-colorscheme monotonic " todo, strings really pop, everything else forces reading
+colorscheme monotonic " todo, strings really pop, everything else forces reading DONT FORGET the String change way below
 
 " light themes
 " colorscheme bw
@@ -315,9 +315,15 @@ set mouse=a                " enable mouse scroll
 
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc
 
+" for debugging highlight groups (put cursor on char and press F10, make sure it's the functional F10
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 hi StatusLine ctermbg=78 ctermfg=16
 hi StatusLineNC ctermbg=240 ctermfg=16
+" turn the below on for monotonic theme
+hi String ctermbg=None ctermfg=78
 
 set guicursor+=n-v-c-i:blinkwait5-blinkon4-blinkoff1
 
