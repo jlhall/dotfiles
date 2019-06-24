@@ -116,6 +116,7 @@ inoremap <expr> <Tab> Tab_Or_Complete()
 " ----------------------------------------------------------------------------
 
 let g:neomake_python_enabled_makers = ["flake8", "pyflakes", "pylint"]
+let g:neomake_html_enabled_makers = ["htmlhint"]
 
 " Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
 if system('pmset -g ps | head -1') ==? 'AC Power'

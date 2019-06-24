@@ -24,7 +24,7 @@ alias showCommits='git log -n 5 --date=rfc-local'
 # interactive rebase against origin/$1
 function ir {
   branch=${1-master}
-  if [ "$branch" =~ "master" ]
+  if [ "$branch" = "master" ]
   then
     printf "You didn't pass a branch, presuming you want master\n"
   fi
