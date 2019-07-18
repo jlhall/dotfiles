@@ -14,36 +14,22 @@ Plug 'vim-scripts/bw.vim' " light theme, black/underline :: bw
 Plug 'logico-software/typewriter' " light theme, black/grey :: typewriter
 
 " everything else
-Plug 'neomake/neomake' " syntax linting
-Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
+Plug 'pangloss/vim-javascript' " for react
+Plug 'mxw/vim-jsx' " for react
+Plug 'davidhalter/jedi-vim' " for python
+Plug 'skywind3000/asyncrun.vim' " async shell commands
+Plug 'w0rp/ale' " syntax linting
 Plug 'tpope/vim-fugitive' " git wrapper (see mappings below)
+Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
 Plug 'tpope/vim-unimpaired' " handy mappings
 Plug 'tpope/vim-commentary' " comment mappings (gcc comments a line, gc for motion..gcap for paragraph, gc visual mode)
-Plug 'srstevenson/vim-picker' " fuzzy file finder (leader p to fuzzy file find)
-Plug 'editorconfig/editorconfig-vim' " editorconfig.org (consistent style and plugin definitions)
 Plug 'jszakmeister/vim-togglecursor' " support for cursor shape changing (based on vim mode)
 Plug 'sheerun/vim-polyglot' " syntax highlighting, indenting
-Plug 'airblade/vim-gitgutter' " sign column/gutter showing git diff (for inline viewing)
 Plug 'tpope/vim-surround' " surroundings mapping (change 'hello world' to <p>hello world</p> with just cs'<p>)
-Plug 'chrisjohnson/vim-grep' " no thought grepping from within vim (key 'gr')
 Plug 'thaerkh/vim-indentguides' " indent guides ffs | = tab, choppy pipe = space
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'Shougo/neosnippet' " For func argument completion
-  Plug 'Shougo/neosnippet-snippets' " For func argument completion
-endif
-
-" sources for deoplete
-Plug 'zchee/deoplete-jedi' " python
-Plug 'wokalski/autocomplete-flow' " js
-Plug 'pbogut/deoplete-elm' " need elm-oracle for it to work
-Plug 'zchee/deoplete-go', { 'do': 'make'} " golang
-Plug 'slashmili/alchemist.vim' " elixir
+Plug 'srstevenson/vim-picker' " fuzzy file finder (leader p to fuzzy file find)
+Plug 'tpope/vim-vinegar' " directory tree sprucing up (configs netrw)
+Plug 'chrisjohnson/vim-grep' " no thought grepping from within vim (key 'gr')
 
 " ADD NEW PLUGINS HERE
 " end of plugin list
@@ -114,17 +100,11 @@ inoremap <expr> <Tab> Tab_Or_Complete()
 " ----------------------------------------------------------------------------
 " Tweaks
 " ----------------------------------------------------------------------------
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
-let g:neomake_python_enabled_makers = ["flake8", "pyflakes", "pylint"]
-let g:neomake_html_enabled_makers = ["htmlhint"]
-
-" Neomake battery-aware config (nw = writing buffer or after 1s post normal mode change, w = writing buffer)
-if system('pmset -g ps | head -1') ==? 'AC Power'
-  call neomake#configure#automake('nwri', 500)
-else
-  call neomake#configure#automake('w')
-endif
-
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix % " async eslint
 set clipboard^=unnamed
 
 " ----------------------------------------------------------------------------
