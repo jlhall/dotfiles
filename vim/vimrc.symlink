@@ -175,7 +175,7 @@ nnoremap <Leader>dp :diffput<CR>
 nnoremap <Leader>vs :vsplit<CR>
 nnoremap <Leader>hs :split<CR>
 nnoremap <Leader>bq :bd<CR>
-nnoremap <Leazer>no :noh<CR>
+nnoremap <C-Z> :noh<CR>
 " Resizes all splits based on the overall split 'situation'
 nnoremap <Leader>z <C-w>=<CR>
 nnoremap <C-j> <C-w>j
