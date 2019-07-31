@@ -96,6 +96,13 @@ com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
 nnoremap <Leader>ee :call Bufdo("e")<CR>
 
 " ----------------------------------------------------------------------------
+" JEDI VIM
+" ----------------------------------------------------------------------------
+let g:jedi#use_splits_not_buffers = "bottom"
+let g:jedi#popup_on_dot = 0
+let g:jedi#usages_command = "<C-N>"
+
+" ----------------------------------------------------------------------------
 " ALE
 " ----------------------------------------------------------------------------
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
@@ -175,7 +182,7 @@ nnoremap <Leader>dp :diffput<CR>
 nnoremap <Leader>vs :vsplit<CR>
 nnoremap <Leader>hs :split<CR>
 nnoremap <Leader>bq :bd<CR>
-nnoremap <C-Z> :noh<CR>
+nnoremap <Leader>no :noh<CR>
 " Resizes all splits based on the overall split 'situation'
 nnoremap <Leader>z <C-w>=<CR>
 nnoremap <C-j> <C-w>j
