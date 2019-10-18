@@ -18,6 +18,9 @@ alias grom='git rebase -i origin/master'
 alias create_tags="ctags -R --exclude=.git --exclude=node_modules --exclude=venv"
 alias cpu="top -ocpu -s10"
 
+# on mac, haskell's `stack` gets a zsh auto-correct to java's `jstack` ugh
+alias hstack="stack"
+
 # see the last few commits
 alias showCommits='git log -n 5 --date=rfc-local'
 
