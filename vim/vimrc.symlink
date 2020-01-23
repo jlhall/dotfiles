@@ -183,6 +183,7 @@ nnoremap <Leader>vs :vsplit<CR>
 nnoremap <Leader>hs :split<CR>
 nnoremap <Leader>bq :bd<CR>
 nnoremap <Leader>no :noh<CR>
+nnoremap <Leader>sp :%s/\t/ /g<CR>
 " Resizes all splits based on the overall split 'situation'
 nnoremap <Leader>z <C-w>=<CR>
 nnoremap <C-j> <C-w>j
