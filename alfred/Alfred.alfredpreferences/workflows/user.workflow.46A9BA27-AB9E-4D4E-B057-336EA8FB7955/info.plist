@@ -167,19 +167,21 @@ def assign_args(idx):
 
 authors = {
 	"jlhall": "d2583784-26c5-43b5-8e57-f399f5bd8bf7",
+	"me": "d2583784-26c5-43b5-8e57-f399f5bd8bf7",
 	"ppenton": "0d368a81-43d5-478c-af3d-7d72ec0f9624",
 	"jdavis": "fa2bda53-227a-44b6-a63e-4141ac007d5e",
-	"psavoie": "d0099621-e449-4897-bb8b-7d2cba0cb17c",
-	"briano": "d6aebfd4-ec1d-4f2e-94d9-ccf903b7a84c",
-	"dfang": "8f42d24a-7744-4605-a7c0-59ef467b9c1b",
-	"csy": "a8563ba0-d3cf-41b7-9beb-f1ec217f682e",
-	"lneath": "e1c59e05-5801-43cb-b6fb-5bd2acfdf5ea",
+	# "psavoie": "d0099621-e449-4897-bb8b-7d2cba0cb17c",
+	# "briano": "d6aebfd4-ec1d-4f2e-94d9-ccf903b7a84c",
+	# "dfang": "8f42d24a-7744-4605-a7c0-59ef467b9c1b",
+	# "csy": "a8563ba0-d3cf-41b7-9beb-f1ec217f682e",
+	# "lneath": "e1c59e05-5801-43cb-b6fb-5bd2acfdf5ea",
 	"allies": "ab717201-dee1-4791-8a91-86137dc9fa75",
 	"mcharleston": "046f69dc-a5c9-4b7c-8eab-eeb13b324958",
-	"celines": "52b71137-a66b-4ebc-b695-452f119357b9",
+	# "celines": "52b71137-a66b-4ebc-b695-452f119357b9",
 	"seanp": "7a988c52-37c8-4f49-bde3-7f9a06d3b786",
-	"conorl": "9a0aa735-b393-4914-bd28-1ef9fa22c318",
-	"calvinh": "7d7a3629-ac19-4bc2-b4dc-041263089104",
+	# "conorl": "9a0aa735-b393-4914-bd28-1ef9fa22c318",
+	# "calvinh": "7d7a3629-ac19-4bc2-b4dc-041263089104",
+	"alau": "993fe197-4885-4ca2-bb56-f2538d3b4277",
 }
 
 
