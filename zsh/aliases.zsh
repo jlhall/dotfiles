@@ -89,6 +89,11 @@ function lsdir {
   find $1 -type d -name "*$2*"
 }
 
+# yes I'm really that lazy
+function see {
+  ls -alh ${1-.}
+}
+
 # this doesn't tell the diff between repeated commands, but that shouldn't be an issue
 # this one is for make
 function mm {
